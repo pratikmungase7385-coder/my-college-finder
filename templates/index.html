@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>College Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+  <style>
+  
+
+ /* 🔥 Flash alert card at top of page */
+.top-alert-container {
+  position: fixed;
+  top: 80px; /* navbar ke niche */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+  animation: slideDown 0.5s ease;
+}
+
+.top-alert-card {
+  position: relative;
+  background: rgba(255, 165, 0, 0.15);
+  border: 1px solid rgba(255, 165, 0, 0.4);
+  backdrop-filter: blur(12px);
+  padding: 15px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  color: #ff8c00;
+  font-weight: 600;
+  max-width: 400px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ff4500;
+}
+
+.btn-login {
+  display: inline-block;
+  margin-top: 8px;
+  background: #ff8c00;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  background: #ff6f00;
+  transform: scale(1.05);
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+  </style>
+</head>
+<body>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="top-alert-container">
+      {% for category, message in messages %}
+        <div class="top-alert-card alert-{{ category }}">
+          <button type="button" class="close-btn" onclick="this.parentElement.style.display='none';">❌</button>
+          <p>{{ message }}</p>
+          <a href="{{ url_for('home') }}" class="btn-login">ok</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+
+
+</div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🎓 My College</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('filter_page', exam='cet') }}"> CET</a></li>
+            <li><a href="{{ url_for('filter_page', exam='jee') }}">JEE</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('aboutus') }}">About us</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+
+
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="signup-btn">Sign Up</a>
+        </div>
+    </nav>
+     
+
+
+
+    <!-- Hero Section -->
+     <header class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>🎓 Find Your Dream College</h1>
+            <p>Explore CET & JEE colleges based on your score and preferences</p> 
+            <!-- <section class="hero" id="hero"> -->
+  <!-- <div class="hero-content">
+    <h1>Welcome to College Finder</h1>
+    <p>Find your dream college with ease.</p>
+    <button>Get Started</button>
+  </div>
+</section> -->
+
+<script>
+  const images = [
+    "{{ url_for('static', filename='images/1.jpg') }}",
+    "{{ url_for('static', filename='images/5.jpg') }}",
+    "{{ url_for('static', filename='images/7.jpg') }}",
+    "{{ url_for('static', filename='images/6.jpg') }}",
+    "{{ url_for('static', filename='images/10.jpg') }}",
+    "{{ url_for('static', filename='images/8.jpg') }}"
+  ];
+
+  let index = 0;
+  const hero = document.getElementById("hero");
+
+  setInterval(() => {
+    index = (index + 1) % images.length;
+    hero.style.backgroundImage = `url(${images[index]})`;
+  }, 4000);
+</script>
+
+            
+            <a href="{{ url_for('filter_page') }}" class="cta-btn">Explore Now</a>
+
+        </div>
+    </header>
+
+
+  {% if name %}
+    <div class="text-center mt-5">
+      <h1>Welcome, {{ name }} 👋</h1>
+      <p>You are successfully logged in.</p>
+    </div>
+  {% endif %}
+
+
+  <section class="stats-section">
+    <div class="stat-box">
+      <i class="ri-emotion-happy-line icon blue"></i>
+      <h2>322360</h2>
+      <p>Active Users</p>
+    </div>
+
+    <div class="stat-box">
+      <i class="ri-star-fill icon orange"></i>
+      <h2>5020</h2>
+      <p>Reviews</p>
+    </div>
+
+    <div class="stat-box">
+      <i class="ri-download-cloud-2-fill icon green"></i>
+      <h2>48597</h2>
+      <p>App Downloads</p>
+    </div>
+
+    <div class="stat-box">
+      <i class="ri-group-fill icon pink"></i>
+      <h2>10289020</h2>
+      <p>Impression</p>
+    </div>
+  </section>
+
+
+
+
+  <section class="app-section">
+    <h2>My college App 1.0 is Live Now! (Early Access)</h2>
+    <div class="store-buttons">
+      <a href="#" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+      </a>
+      <a href="#" target="_blank">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
+      </a>
+      <a href="#" target="_blank">
+        <img src="https://aistechx.com/store/1/app/indus.png" alt="Download on Indus Appstore">
+      </a>
+    </div>
+  </section>
+
+
+   <section class="contact-section">
+  <div class="contact-header">
+    <button class="contact-btn">Contact Us</button>
+    <h2>Have Questions? We're Ready to Assist You</h2>
+  </div>
+
+  <div class="contact-container">
+    <!-- Left side info -->
+    <div class="contact-info">
+      <div class="info-box">
+        <i class="fas fa-map-marker-alt"></i>
+        <h4>Address</h4>
+        <p>my collegefinder<br>Pune, Maharashtra, IN 414506</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-phone-alt"></i>
+        <h4>Call Us</h4>
+        <p>+91 70382 02440<br>+91 70382 02440</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-envelope"></i>
+        <h4>Email Us</h4>
+        <p>hello@mycollegefinder.in<br>ceo@mycollegefinder.in</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-clock"></i>
+        <h4>Open Hours</h4>
+        <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+      </div>
+    </div>
+
+    <!-- Right side form -->
+    <div class="contact-form">
+      <form>
+        <div class="form-row">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <input type="text" placeholder="Subject" required>
+        <textarea placeholder="Message" rows="5" required></textarea>
+        <button type="submit" class="send-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+  
+<!--footer-->
+<footer class="footer">
+  <div class="footer-container">
+
+  
+    <div class="footer-column">
+      <h3>College Finder</h3>
+      <p>Helping students discover top colleges and universities based on their entrance exams, preferences, and career goals.</p>
+      <p><strong>Phone:</strong> +91 9876543210</p>
+      <p><strong>Email:</strong> info@collegefinder.in</p>
+      <p><strong>Registration No:</strong> EDU-MH-2025-001</p>
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Useful Links</h4>
+      <ul class="footer-list">
+        <li><a href="/"><span>&gt;</span>Home</a></li>
+        <li><a href="/about"><span>&gt;</span>About Us</a></li>
+        <li><a href="/colleges"><span>&gt;</span>Find Colleges</a></li>
+        <li><a href="/contact"><span>&gt;</span>Contact</a></li>
+        <li><a href="/faq"><span>&gt;</span>FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- Developers / Policies -->
+    <div class="footer-column">
+      <h4>Developers & Policies</h4>
+      <ul class="footer-list">
+  <li><a href="#"><span>&gt;</span> Developers</a></li>
+  <li><a href="#"><span>&gt;</span> Trust & Security</a></li>
+  <li><a href="#"><span>&gt;</span> API</a></li>
+  <li><a href="#"><span>&gt;</span> Sitemap</a></li>
+  <li><a href="#"><span>&gt;</span> Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Content Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Privacy Policy</a></li>
+  <li><a href="#"><span>&gt;</span> Terms & Conditions</a></li>
+</ul>
+
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <p>Stay connected for the latest admission updates and educational insights.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <strong>College Finder</strong>. All Rights Reserved | Designed by <a href="#">Pratik Boss</a></p>
+  </div>
+</footer>
+
+<!-- Font Awesome for Social Media Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+
+
+</body>
+</html>

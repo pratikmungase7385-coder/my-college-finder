@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | My College Finder</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+          
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 70px auto;
+            background: #1a237e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+           color: #ffca28;
+        }
+        h3 {
+            text-align: center;
+            color: #f5e4b1;
+        }
+        form {
+            margin-top: 30px;
+             
+        }
+        label {
+            font-weight: 600;
+            color:white;
+            display: block;
+            margin-top: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 25px;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .container p {
+            color: white;
+        }
+        .footer1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+          <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🎓 My College</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('filter_page', exam='cet') }}"> CET</a></li>
+            <li><a href="{{ url_for('filter_page', exam='jee') }}">JEE</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('aboutus') }}">About us</a></li>
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="signup-btn">Sign Up</a>
+        </div>
+    </nav>
+    <!-- <div class="container">
+        <h2>📞 Contact Us</h2>
+        <p style="text-align:center;">Have a question or suggestion? We’d love to hear from you!</p>
+
+        <form method="POST" action="http://127.0.0.1:4000/">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+                     <h3>OR</h3>
+        <div class="footer1">
+             <a href="#"><p>mycollegefinder@gmail.in</p></a>
+            © 2025 My College Finder | Developed by Pratik Mungase ⚡
+        </div>
+    </div> -->
+
+
+    <section class="contact-section">
+  <div class="contact-header">
+    <button class="contact-btn">Contact Us</button>
+    <h2>Have Questions? We're Ready to Assist You</h2>
+  </div>
+
+  <div class="contact-container">
+    <!-- Left side info -->
+    <div class="contact-info">
+      <div class="info-box">
+        <i class="fas fa-map-marker-alt"></i>
+        <h4>Address</h4>
+        <p>my collegefinder<br>Pune, Maharashtra, IN 414506</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-phone-alt"></i>
+        <h4>Call Us</h4>
+        <p>+91 70382 02440<br>+91 70382 02440</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-envelope"></i>
+        <h4>Email Us</h4>
+        <p>hello@mycollegefinder.in<br>ceo@mycollegefinder.in</p>
+      </div>
+
+      <div class="info-box">
+        <i class="fas fa-clock"></i>
+        <h4>Open Hours</h4>
+        <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+      </div>
+    </div>
+
+    <!-- Right side form -->
+    <div class="contact-form">
+      <form>
+        <div class="form-row">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <input type="text" placeholder="Subject" required>
+        <textarea placeholder="Message" rows="5" required></textarea>
+        <button type="submit" class="send-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Font Awesome CDN -->
+<script src="https://kit.fontawesome.com/a2d9d5a52a.js" crossorigin="anonymous"></script>
+
+     <!--footer-->
+<footer class="footer">
+  <div class="footer-container">
+
+  
+    <div class="footer-column">
+      <h3>College Finder</h3>
+      <p>Helping students discover top colleges and universities based on their entrance exams, preferences, and career goals.</p>
+      <p><strong>Phone:</strong> +91 9876543210</p>
+      <p><strong>Email:</strong> info@collegefinder.in</p>
+      <p><strong>Registration No:</strong> EDU-MH-2025-001</p>
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Useful Links</h4>
+      <ul class="footer-list">
+        <li><a href="/"><span>&gt;</span>Home</a></li>
+        <li><a href="/about"><span>&gt;</span>About Us</a></li>
+        <li><a href="/colleges"><span>&gt;</span>Find Colleges</a></li>
+        <li><a href="/contact"><span>&gt;</span>Contact</a></li>
+        <li><a href="/faq"><span>&gt;</span>FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- Developers / Policies -->
+    <div class="footer-column">
+      <h4>Developers & Policies</h4>
+      <ul class="footer-list">
+  <li><a href="#"><span>&gt;</span> Developers</a></li>
+  <li><a href="#"><span>&gt;</span> Trust & Security</a></li>
+  <li><a href="#"><span>&gt;</span> API</a></li>
+  <li><a href="#"><span>&gt;</span> Sitemap</a></li>
+  <li><a href="#"><span>&gt;</span> Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Content Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Privacy Policy</a></li>
+  <li><a href="#"><span>&gt;</span> Terms & Conditions</a></li>
+</ul>
+
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <p>Stay connected for the latest admission updates and educational insights.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <strong>College Finder</strong>. All Rights Reserved | Designed by <a href="#">Pratik Boss</a></p>
+  </div>
+</footer>
+
+<!-- Font Awesome for Social Media Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
+
+
+</body>
+</html>

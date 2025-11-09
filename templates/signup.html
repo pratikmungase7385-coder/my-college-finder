@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - My College Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+
+
+ 
+
+  <!-- Flash messages (success, error, etc.) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="message {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="modal-content" style="margin: 100px auto; max-width: 400px;">
+   <h2 align="center">Signup</h2>
+    <form method="POST" action="{{ url_for('signup') }}">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p style="margin-top:10px;">
+      Already have an account?
+      <a href="{{ url_for('login') }}">Login</a>
+    </p>
+  </div>
+</body> 
+</html>

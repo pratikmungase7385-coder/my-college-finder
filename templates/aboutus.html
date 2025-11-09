@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us | College Finder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ <!--
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background:white;
+      color: black;
+      margin: 0;
+      padding: 0;
+    }
+
+     .about-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .about-section .img {
+  margin: 30px 0;
+}
+
+.about-img {
+  width: 80%;
+
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(38, 198, 218, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.about-img:hover {
+  transform: scale(1.03);
+}
+
+
+    h1 {
+     color: #26c6da;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+      h2 {
+      color: #ffca28;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: black;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 800px;
+      margin-bottom: 25px;
+    }
+
+    .team-section {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+   
+    .card {
+      background: #112240;
+      border-radius: 16px;
+      padding: 20px 30px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(38, 198, 218, 0.2);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: #17315a;
+    }
+
+    .card h3 {
+      color: #26c6da;
+      margin: 10px 0 5px 0;
+    }
+
+    .card p {
+      color: #ccc;
+      font-size: 15px;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 30px;
+      color: #26c6da;
+      text-decoration: none;
+      font-weight: 600;
+    } 
+
+    a.back:hover {
+      text-decoration: underline;
+    }
+  </style>
+-->
+</head>
+<body>
+
+          
+    <nav class="navbar">
+        <div class="logo">🎓 My College</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('filter_page', exam='cet') }}"> CET</a></li>
+            <li><a href="{{ url_for('filter_page', exam='jee') }}">JEE</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('aboutus') }}">About us</a></li>
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="signup-btn">Sign Up</a>
+        </div>
+    </nav>
+
+  <section class="about-section">
+    <h1>About College Finder</h1>
+<div class="img">
+  <img src="{{ url_for('static', filename='images/1.webp') }}" alt="College Finder" class="about-img">
+</div>
+<div class="pabout">
+    <h2>Vission</h2>
+    <p>
+      College Finder is a smart platform built to help students discover engineering colleges in India or Maharashtra
+      based on their entrance exam scores, caste category, and preferred university or city.
+    </p>
+    <h2>Mission</h2>
+    <p>
+      Our mission is to simplify the admission process by providing clear, accurate, and real-time data for
+      students — helping them find the right college that matches their rank and dream branch.
+    </p>
+</div>
+    <h2 style="color:#26c6da; margin-top: 50px;">Meet the Developer</h2>
+    <div class="team-section">
+      <div class="card">
+        <h3>Pratik Mungase</h3>
+        <p>Founder & Developer</p>
+        
+      </div>
+    </div>
+
+    <a href="{{ url_for('home') }}" class="back">← Back to Home</a>
+  </section> 
+
+
+  
+<div class="mainfoot">
+
+ <!--footer-->
+<footer class="footer">
+  <div class="footer-container">
+
+  
+    <div class="footer-column">
+      <h3>College Finder</h3>
+      <p>Helping students discover top colleges and universities based on their entrance exams, preferences, and career goals.</p>
+      <p><strong>Phone:</strong> +91 9876543210</p>
+      <p><strong>Email:</strong> info@collegefinder.in</p>
+      <p><strong>Registration No:</strong> EDU-MH-2025-001</p>
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Useful Links</h4>
+      <ul class="footer-list">
+        <li><a href="/"><span>&gt;</span>Home</a></li>
+        <li><a href="/about"><span>&gt;</span>About Us</a></li>
+        <li><a href="/colleges"><span>&gt;</span>Find Colleges</a></li>
+        <li><a href="/contact"><span>&gt;</span>Contact</a></li>
+        <li><a href="/faq"><span>&gt;</span>FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- Developers / Policies -->
+    <div class="footer-column">
+      <h4>Developers & Policies</h4>
+      <ul class="footer-list">
+  <li><a href="#"><span>&gt;</span> Developers</a></li>
+  <li><a href="#"><span>&gt;</span> Trust & Security</a></li>
+  <li><a href="#"><span>&gt;</span> API</a></li>
+  <li><a href="#"><span>&gt;</span> Sitemap</a></li>
+  <li><a href="#"><span>&gt;</span> Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Content Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Privacy Policy</a></li>
+  <li><a href="#"><span>&gt;</span> Terms & Conditions</a></li>
+</ul>
+
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <p>Stay connected for the latest admission updates and educational insights.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <strong>College Finder</strong>. All Rights Reserved | Designed by <a href="#">Pratik Boss</a></p>
+  </div>
+</footer>
+
+<!-- Font Awesome for Social Media Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Colleges</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <style>
+      
+
+        .sections {
+            display: flex;
+            
+            justify-content: center;
+            padding: 100px 20px;
+        }
+
+        .section {
+            
+            padding: 60px 60px;
+            border-radius: 25px;
+            text-align: center;
+            width: 550px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            transition: 0.3s;
+        }
+
+        .section:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            color: #ffca28;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #4f93ff;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1.1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        select[multiple] {
+            height: auto;
+            min-height: 100px;
+        }
+
+        button {
+            background: #26c6da;
+            color: #1a237e;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00acc1;
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+
+      <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🎓 My College</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('filter_page', exam='cet') }}"> CET</a></li>
+            <li><a href="{{ url_for('filter_page', exam='jee') }}">JEE</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('aboutus') }}">About us</a></li>
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="{{ url_for('login') }}" class="login-btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="signup-btn">Sign Up</a>
+        </div>
+    </nav>
+
+
+<div class="formm">
+<div class="sections">
+    <div class="section">
+        <h2>Find Your College</h2>
+        <form method="POST">
+            <label>Exam Type</label>
+            <!-- <select name="exam" required>
+                <option value="">Select Exam</option>
+                <option value="CET">CET</option>
+                <option value="JEE">JEE</option>
+            </select> -->
+            <select name="exam" required>
+    <option value="">Select Exam</option>
+    <option value="CET" {% if exam == 'CET' %}selected{% endif %}>CET</option>
+    <option value="JEE" {% if exam == 'JEE' %}selected{% endif %}>JEE</option>
+</select>
+
+
+            <label>Percentage / Rank</label>
+            <input type="number" name="score" placeholder="Enter your % or rank" required>
+
+            <label>Caste / Category</label>
+            <select name="caste" required>
+                <option value="">Select Category</option>
+                <option value="Open">Open</option>
+                <option value="OBC">OBC</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="EWS">EWS</option>
+                <option value="NT">NT</option>
+                <option value="VJNT">VJNT</option>
+            </select>
+
+           <label>University</label>
+<select name="university">
+    <option value="">Select University</option>
+    {% for uni in maharashtra_universities %}
+        <option value="{{ uni }}">{{ uni }}</option>
+    {% endfor %}
+</select>
+
+<label>City</label>
+<select name="city">
+    <option value="">Select City</option>
+    {% for city in maharashtra_cities %}
+        <option value="{{ city }}">{{ city }}</option>
+    {% endfor %}
+</select>
+
+<label>Branch</label>
+<select name="branch" required>
+    <option value="">Select Branch</option>
+    {% for branch in maharashtra_branches %}
+        <option value="{{ branch }}">{{ branch }}</option>
+    {% endfor %}
+</select>
+
+
+            <button type="submit">Search Colleges</button>
+        </form>
+    </div>
+</div>
+</div>
+
+ <!--footer-->
+<footer class="footer">
+  <div class="footer-container">
+
+  
+    <div class="footer-column">
+      <h3>College Finder</h3>
+      <p>Helping students discover top colleges and universities based on their entrance exams, preferences, and career goals.</p>
+      <p><strong>Phone:</strong> +91 9876543210</p>
+      <p><strong>Email:</strong> info@collegefinder.in</p>
+      <p><strong>Registration No:</strong> EDU-MH-2025-001</p>
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Useful Links</h4>
+      <ul class="footer-list">
+        <li><a href="/"><span>&gt;</span>Home</a></li>
+        <li><a href="/about"><span>&gt;</span>About Us</a></li>
+        <li><a href="/colleges"><span>&gt;</span>Find Colleges</a></li>
+        <li><a href="/contact"><span>&gt;</span>Contact</a></li>
+        <li><a href="/faq"><span>&gt;</span>FAQs</a></li>
+      </ul>
+    </div>
+
+    <!-- Developers / Policies -->
+    <div class="footer-column">
+      <h4>Developers & Policies</h4>
+      <ul class="footer-list">
+  <li><a href="#"><span>&gt;</span> Developers</a></li>
+  <li><a href="#"><span>&gt;</span> Trust & Security</a></li>
+  <li><a href="#"><span>&gt;</span> API</a></li>
+  <li><a href="#"><span>&gt;</span> Sitemap</a></li>
+  <li><a href="#"><span>&gt;</span> Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Content Disclaimer</a></li>
+  <li><a href="#"><span>&gt;</span> Privacy Policy</a></li>
+  <li><a href="#"><span>&gt;</span> Terms & Conditions</a></li>
+</ul>
+
+    </div>
+
+    
+    <div class="footer-column">
+      <h4>Follow Us</h4>
+      <p>Stay connected for the latest admission updates and educational insights.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <strong>College Finder</strong>. All Rights Reserved | Designed by <a href="#">Pratik Boss</a></p>
+  </div>
+</footer>
+
+<!-- Font Awesome for Social Media Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
