@@ -132,13 +132,20 @@
                 <option value="VJNT">VJNT</option>
             </select>
 
-           <label>University</label>
+<label>University</label>
 <select name="university">
-    <option value="">Select University</option>
-    {% for uni in maharashtra_universities %}
-        <option value="{{ uni }}">{{ uni }}</option>
-    {% endfor %}
+<option value="">Select University</option>
+{% for uni in maharashtra_universities %}
+    <option value="{{ uni }}" 
+            {% if uni == selected_university %} selected {% endif %}>
+        {{ uni }}
+    </option>
+{% endfor %}
+
+
+
 </select>
+
 
 <label>City</label>
 <select name="city">

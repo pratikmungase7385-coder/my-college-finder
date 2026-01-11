@@ -189,19 +189,122 @@ def home():
 
 
 
+# @app.route('/filter', methods=['GET', 'POST'])
+# def filter_page():
+#     conn = get_college_connection()
+
+#     # Distinct dropdown data
+#     maharashtra_universities = [row['university'] for row in conn.execute("SELECT DISTINCT university FROM colleges")]
+#     maharashtra_cities = [row['city'] for row in conn.execute("SELECT DISTINCT city FROM colleges")]
+#     maharashtra_branches = [row['branch'] for row in conn.execute("SELECT DISTINCT branch FROM colleges")]
+
+
+
+
+
+# @app.route('/filter', methods=['GET', 'POST'])
+# def filter_page():
+#     conn = get_college_connection()
+
+#     maharashtra_universities = [row['university'] for row in conn.execute("SELECT DISTINCT university FROM colleges")]
+#     maharashtra_cities = [row['city'] for row in conn.execute("SELECT DISTINCT city FROM colleges")]
+#     maharashtra_branches = [row['branch'] for row in conn.execute("SELECT DISTINCT branch FROM colleges")]
+
+#     # --- Default values (GET request) ---
+#     university = ""
+#     city = ""
+#     branch = ""
+
+#     colleges = []
+
+#     exam = request.args.get('exam', '').upper()
+
+    # if request.method == 'POST':
+    #     exam = request.form['exam']
+    #     caste = request.form['caste']
+    #     score = float(request.form['score'])
+    #     university = request.form['university']
+    #     city = request.form['city']
+    #     branch = request.form['branch']
+
+
+
+    # if request.method == 'POST':
+    #     exam = request.form['exam']
+    #     caste = request.form['caste']
+    #     score = float(request.form['score'])
+    #     university = request.form['university']
+    #     city = request.form['city']
+    #     branch = request.form['branch']
+
+
+    #     cutoff_column = "cutoff_cet" if exam == "CET" else "cutoff_jee"
+
+    #     query = f"SELECT name, city, branch, {cutoff_column} as cutoff FROM colleges WHERE branch=?"
+    #     params = [branch]
+
+    #     if university and university != "Select":
+    #         query += " AND university=?"
+    #         params.append(university)
+    #     if city and city != "Select":
+    #         query += " AND city=?"
+    #         params.append(city)
+
+    #     print("[DEBUG] Query:", query)
+    #     print("[DEBUG] Params:", params)
+
+    #     rows = conn.execute(query, params).fetchall()
+    #     print("[INFO] Colleges fetched from DB:", len(rows))
+
+    #     for r in rows:
+    #         # cutoff stored like: OPEN:89,OBC:85,SC:80,ST:74,NT:76,VJNT:78,EWS:83
+    #         try:
+    #             cutoff_dict = dict(item.split(":") for item in r['cutoff'].split(","))
+    #             caste_cutoff = float(cutoff_dict.get(caste.upper(), 0))
+    #             if score >= caste_cutoff:
+    #                 colleges.append({
+    #                     "name": r['name'],
+    #                     "city": r['city'],
+    #                     # "branch": r['branch'],
+    #                     "caste_cutoff": caste_cutoff
+    #                 })
+    #         except Exception as e:
+    #             print("[ERROR] Parsing cutoff for:", r['name'], "+", e)
+
+    #     print("[INFO] Colleges Matched:", len(colleges))
+    #     conn.close()
+    #     return render_template('result.html', colleges=colleges)
+
+    # conn.close()
+    # return render_template(
+    #     'filter.html',
+    #     maharashtra_universities=maharashtra_universities,
+    #     maharashtra_cities=maharashtra_cities,
+    #     maharashtra_branches=maharashtra_branches,
+    #     selected_university=university,
+    #     selected_city=city,
+    #     selected_branch=branch
+    # )
+
+
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_page():
     conn = get_college_connection()
 
-    # Distinct dropdown data
+    # Fetch dropdown data from DB
     maharashtra_universities = [row['university'] for row in conn.execute("SELECT DISTINCT university FROM colleges")]
     maharashtra_cities = [row['city'] for row in conn.execute("SELECT DISTINCT city FROM colleges")]
     maharashtra_branches = [row['branch'] for row in conn.execute("SELECT DISTINCT branch FROM colleges")]
 
     colleges = []
 
+    # Default values (GET request)
     exam = request.args.get('exam', '').upper()
+    university = ""
+    city = ""
+    branch = ""
 
+    # --------------------------- POST REQUEST ---------------------------
     if request.method == 'POST':
         exam = request.form['exam']
         caste = request.form['caste']
@@ -212,50 +315,48 @@ def filter_page():
 
         cutoff_column = "cutoff_cet" if exam == "CET" else "cutoff_jee"
 
-        query = f"SELECT name, city, branch, {cutoff_column} as cutoff FROM colleges WHERE branch=?"
+        query = f"SELECT name, city, branch, {cutoff_column} AS cutoff FROM colleges WHERE branch=?"
         params = [branch]
 
         if university and university != "Select":
             query += " AND university=?"
             params.append(university)
+
         if city and city != "Select":
             query += " AND city=?"
             params.append(city)
 
-        print("[DEBUG] Query:", query)
-        print("[DEBUG] Params:", params)
-
         rows = conn.execute(query, params).fetchall()
-        print("[INFO] Colleges fetched from DB:", len(rows))
 
         for r in rows:
-            # cutoff stored like: OPEN:89,OBC:85,SC:80,ST:74,NT:76,VJNT:78,EWS:83
             try:
                 cutoff_dict = dict(item.split(":") for item in r['cutoff'].split(","))
                 caste_cutoff = float(cutoff_dict.get(caste.upper(), 0))
+
                 if score >= caste_cutoff:
                     colleges.append({
                         "name": r['name'],
                         "city": r['city'],
-                        # "branch": r['branch'],
                         "caste_cutoff": caste_cutoff
                     })
-            except Exception as e:
-                print("[ERROR] Parsing cutoff for:", r['name'], "+", e)
+            except:
+                pass
 
-        print("[INFO] Colleges Matched:", len(colleges))
         conn.close()
         return render_template('result.html', colleges=colleges)
 
+    # --------------------------- RENDER FILTER PAGE ---------------------------
     conn.close()
     return render_template(
         'filter.html',
         maharashtra_universities=maharashtra_universities,
         maharashtra_cities=maharashtra_cities,
         maharashtra_branches=maharashtra_branches,
-          exam=exam
+        selected_university=university,
+        selected_city=city,
+        selected_branch=branch,
+        exam=exam
     )
-
 
 
 
